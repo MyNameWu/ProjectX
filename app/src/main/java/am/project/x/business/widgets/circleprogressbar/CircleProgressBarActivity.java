@@ -28,10 +28,11 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import am.project.x.R;
-import am.project.x.base.BaseActivity;
-import am.widget.circleprogressbar.CircleProgressBar;
 import androidx.annotation.Nullable;
+
+import am.appcompat.app.BaseActivity;
+import am.project.x.R;
+import am.widget.circleprogressbar.CircleProgressBar;
 
 /**
  * 环形进度条
@@ -43,17 +44,17 @@ public class CircleProgressBarActivity extends BaseActivity implements
     private CircleProgressBar mProgress;
     private float density;
 
+    public CircleProgressBarActivity() {
+        super(R.layout.activity_circleprogressbar);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, CircleProgressBarActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_circleprogressbar;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.cpb_toolbar);
         mProgress = findViewById(R.id.cpb_cpb_bar);
         density = getResources().getDisplayMetrics().density;

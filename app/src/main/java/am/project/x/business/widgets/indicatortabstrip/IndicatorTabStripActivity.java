@@ -23,33 +23,34 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import am.appcompat.app.BaseActivity;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 import am.util.viewpager.adapter.ViewsPagerAdapter;
 import am.widget.indicatortabstrip.IndicatorTabStrip;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * 游标顶部栏
  */
 public class IndicatorTabStripActivity extends BaseActivity {
 
+    public IndicatorTabStripActivity() {
+        super(R.layout.activity_indicatortabstrip);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, IndicatorTabStripActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_indicatortabstrip;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.its_toolbar);
         ((ViewPager) findViewById(R.id.its_vp_content)).setAdapter(new PagerAdapter(getPagers()));
         ((IndicatorTabStrip) findViewById(R.id.its_its_tabs)).setAdapter(new TabAdapter());

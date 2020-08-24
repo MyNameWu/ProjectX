@@ -1,18 +1,24 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
+    buildToolsVersion '30.0.1'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 17
-        versionName "1.0.0"
+        targetSdkVersion 30
+        versionCode 18
+        versionName "1.1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
 }
 
 //apply from: "bintray.gradle"

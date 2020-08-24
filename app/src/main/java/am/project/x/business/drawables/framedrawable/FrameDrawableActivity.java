@@ -21,9 +21,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import am.appcompat.app.BaseActivity;
 import am.drawable.FrameDrawable;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 
 /**
  * 帧图片
@@ -32,17 +32,17 @@ public class FrameDrawableActivity extends BaseActivity {
 
     private FrameDrawable mDrawable;
 
+    public FrameDrawableActivity() {
+        super(R.layout.activity_framedrawable);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, FrameDrawableActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_framedrawable;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.frame_toolbar);
         // TODO
         mDrawable = new FrameDrawable();

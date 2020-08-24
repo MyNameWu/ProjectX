@@ -22,44 +22,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import am.project.x.R;
-import am.project.x.base.BaseActivity;
-import am.project.x.business.others.opentype.OpenTypeActivity;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import am.project.x.R;
+import am.project.x.business.others.opentype.OpenTypeActivity;
+import am.project.x.common.CommonActivity;
 
 /**
  * 字体
  */
-public class FontActivity extends BaseActivity implements FontView,
+public class FontActivity extends CommonActivity implements FontView,
         FontFamilyPickerDialog.OnPickerListener, FontViewHolder.OnViewHolderListener {
 
-    private final FontPresenter mPresenter = new FontPresenter(this);
+    private final FontPresenter mPresenter = new FontPresenter().setViewHolder(getViewHolder());
     private final FontAdapter mAdapter = new FontAdapter(mPresenter, this);
 
     private FontFamilyPickerDialog mPicker;
+
+    public FontActivity() {
+        super(R.layout.activity_font);
+    }
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, FontActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_font;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.font_toolbar);
         final RecyclerView content = findViewById(R.id.font_content);
         content.setAdapter(mAdapter);
         showLoading();
         mPresenter.loadConfig();
-    }
-
-    @Override
-    protected FontPresenter getPresenter() {
-        return mPresenter;
     }
 
     @Override

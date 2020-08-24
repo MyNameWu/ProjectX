@@ -30,9 +30,9 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import am.appcompat.app.BaseActivity;
 import am.drawable.CornerDrawable;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 
 /**
  * 尖角框
@@ -44,17 +44,17 @@ public class CornerDrawableActivity extends BaseActivity implements
     private CornerDrawable mDrawable;
     private float mDensity;
 
+    public CornerDrawableActivity() {
+        super(R.layout.activity_cornerdrawable);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, CornerDrawableActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_cornerdrawable;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.cnd_toolbar);
         mVContent = findViewById(R.id.cnd_tv_content);
         mDensity = getResources().getDisplayMetrics().density;

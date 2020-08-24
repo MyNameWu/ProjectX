@@ -24,8 +24,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import am.appcompat.app.BaseActivity;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 
 /**
  * 剪切板
@@ -36,17 +36,17 @@ public class ClipboardActivity extends BaseActivity implements View.OnClickListe
     private TextView mVResult;
     private final ClipboardBean mData = ClipboardBean.test();
 
+    public ClipboardActivity() {
+        super(R.layout.activity_clipboard);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, ClipboardActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_clipboard;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.clipboard_toolbar);
         mVResult = findViewById(R.id.clipboard_tv_result);
         findViewById(R.id.clipboard_btn_copy).setOnClickListener(this);

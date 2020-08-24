@@ -22,29 +22,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
+import am.appcompat.app.BaseActivity;
 import am.project.x.BuildConfig;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 import am.project.x.business.browser.BrowserActivity;
 import am.project.x.utils.ViewUtils;
-import androidx.annotation.Nullable;
 
 /**
  * 关于
  */
 public class AboutActivity extends BaseActivity {
 
+    public AboutActivity() {
+        super(R.layout.activity_about);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, AboutActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_about;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         ViewUtils.setLayoutFullscreen(getWindow().getDecorView(), false);
         setSupportActionBar(R.id.about_toolbar);
         ((TextView) findViewById(R.id.about_tv_version)).setText(

@@ -11,29 +11,30 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import am.appcompat.app.BaseActivity;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 import am.project.x.business.others.retrofithelper.gson.GsonHelper;
-import am.util.retrofit.TinyCallback;
-import am.util.retrofit.WeakCallback;
+import am.util.retrofit.Callback;
+import am.util.retrofit.CallbackWrapper;
 
-public class RetrofitActivity extends BaseActivity implements TinyCallback<TestBean> {
+public class RetrofitActivity extends BaseActivity implements Callback<TestBean> {
 
-    private final TestCallback mCallback = new TestCallback(this);
+    private final CallbackWrapper<TestBean> mCallback =
+            new CallbackWrapper<TestBean>().setCallback(this, true);
     private EditText mVInput;
     private TextView mVOutput;
+
+    public RetrofitActivity() {
+        super(R.layout.activity_retrofit);
+    }
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, RetrofitActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_retrofit;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.retrofit_toolbar);
         mVInput = findViewById(R.id.main_edt_input);
         mVOutput = findViewById(R.id.main_tv_output);
@@ -49,7 +50,7 @@ public class RetrofitActivity extends BaseActivity implements TinyCallback<TestB
             String input = mVInput.getText().toString().trim();
             if (TextUtils.isEmpty(input))
                 input = getString(R.string.retrofit_input_hint);
-            TestCallFactory.getWeather(input).enqueue(new WeakCallback<>(mCallback));
+            TestCallFactory.getWeather(input).enqueue(mCallback);
         }
     }
 
@@ -62,8 +63,7 @@ public class RetrofitActivity extends BaseActivity implements TinyCallback<TestB
     }
 
     @Override
-    public void onFailure(int code, String message, TestBean result) {
-        mVOutput.setText(getString(R.string.retrofit_output_error, code, message,
-                (result == null ? "null" : GsonHelper.toJson(result))));
+    public void onFailure(int code, String message) {
+        mVOutput.setText(getString(R.string.retrofit_output_error, code, message, ("null")));
     }
 }

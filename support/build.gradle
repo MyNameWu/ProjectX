@@ -1,15 +1,26 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
+    buildToolsVersion '30.0.1'
 
     defaultConfig {
         //noinspection MinSdkTooLow
-        minSdkVersion 9
-        targetSdkVersion 28
-        versionCode 29
-        versionName "1.6.1"
+        minSdkVersion 11
+        targetSdkVersion 30
+        versionCode 33
+        versionName "1.7.1"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.collection:collection:1.1.0'
 }
 
 //apply from: "bintray.gradle"

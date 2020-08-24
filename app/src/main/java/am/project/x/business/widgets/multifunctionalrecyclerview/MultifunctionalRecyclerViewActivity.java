@@ -24,8 +24,8 @@ import android.view.MenuItem;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import am.appcompat.app.BaseActivity;
 import am.project.x.R;
-import am.project.x.base.BaseActivity;
 import am.widget.multifunctionalrecyclerview.MultifunctionalLinearLayoutManager;
 import am.widget.multifunctionalrecyclerview.MultifunctionalRecyclerView;
 
@@ -34,21 +34,21 @@ import am.widget.multifunctionalrecyclerview.MultifunctionalRecyclerView;
  */
 public class MultifunctionalRecyclerViewActivity extends BaseActivity {
 
-    public static void start(Context context) {
-        context.startActivity(new Intent(context, MultifunctionalRecyclerViewActivity.class));
-    }
-
     private final Adapter mAdapter = new Adapter();
     private MultifunctionalRecyclerView mVContent;
     private MultifunctionalLinearLayoutManager mManager;
 
-    @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_multifunctionalrecyclerview;
+    public MultifunctionalRecyclerViewActivity() {
+        super(R.layout.activity_multifunctionalrecyclerview);
+    }
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, MultifunctionalRecyclerViewActivity.class));
     }
 
     @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.mrv_toolbar);
         mVContent = findViewById(R.id.mrv_rv_content);
         final int gap = 20;

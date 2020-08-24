@@ -22,12 +22,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import am.project.x.R;
-import am.project.x.base.BaseActivity;
-import am.widget.multiactiontextview.MultiActionClickableSpan;
-import am.widget.multiactiontextview.MultiActionTextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import am.appcompat.app.BaseActivity;
+import am.project.x.R;
+import am.widget.multiactiontextview.MultiActionClickableSpan;
+import am.widget.multiactiontextview.MultiActionTextView;
 
 /**
  * 文本点击
@@ -35,17 +36,17 @@ import androidx.core.content.ContextCompat;
 public class MultiActionTextViewActivity extends BaseActivity implements View.OnClickListener,
         MultiActionClickableSpan.OnTextClickedListener {
 
+    public MultiActionTextViewActivity() {
+        super(R.layout.activity_multiactiontextview);
+    }
+
     public static void start(Context context) {
         context.startActivity(new Intent(context, MultiActionTextViewActivity.class));
     }
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.activity_multiactiontextview;
-    }
-
-    @Override
-    protected void initializeActivity(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setSupportActionBar(R.id.mat_toolbar);
         final MultiActionTextView text = findViewById(R.id.mat_tv_content);
         final int colorPrimary = ContextCompat.getColor(this, R.color.colorPrimary);
